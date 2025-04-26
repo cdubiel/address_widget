@@ -356,23 +356,17 @@
             const address = addressInput.value.trim();
             
             if (address) {
-                // Show name and phone fields
-                nameGroup.classList.remove('hidden');
-                phoneGroup.classList.remove('hidden');
-                
-                setTimeout(() => {
-                    nameGroup.classList.add('visible');
-                    phoneGroup.classList.add('visible');
-                    
-                    // Focus the name input
-                    nameInput.focus();
-                }, 10);
+                // Switch to final view with all fields visible side by side
+                showFinalView();
                 
                 // Update form state
                 formState = 'details';
                 
                 // Update button text
                 submitBtn.textContent = 'SEE MY PRICE';
+                
+                // Focus the name input
+                nameInput.focus();
             } else {
                 // Show error if address is empty
                 addressInput.style.borderBottom = '2px solid var(--orange)';
@@ -472,6 +466,37 @@
         }
     }
     
+    // Show the final view with all fields side by side
+    function showFinalView() {
+        // Hide the city/state display
+        cityStateDisplay.style.display = 'none';
+        
+        // Reset the form layout
+        widgetForm.className = 'widget-form final-view';
+        
+        // Show all fields
+        zipcodeGroup.style.display = 'none'; // Hide ZIP code field
+        addressGroup.classList.remove('hidden');
+        addressGroup.style.display = 'block';
+        addressGroup.style.flex = '2';
+        
+        nameGroup.classList.remove('hidden');
+        nameGroup.style.display = 'block';
+        nameGroup.style.flex = '1';
+        
+        phoneGroup.classList.remove('hidden');
+        phoneGroup.style.display = 'block';
+        phoneGroup.style.flex = '1';
+        
+        // Add pin icon to address field if not already there
+        if (!addressGroup.querySelector('.pin-icon')) {
+            const pinIcon = document.createElement('span');
+            pinIcon.className = 'pin-icon';
+            pinIcon.innerHTML = '📍';
+            addressGroup.insertBefore(pinIcon, addressInput);
+        }
+    }
+
     // Send form data to webhook
     async function sendToWebhook(formData) {
         try {
