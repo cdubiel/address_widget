@@ -361,9 +361,12 @@
             }
             
             if (!webhookUrl) {
-                // When deployed on Vercel, just show success message without sending to webhook
-                console.log('No webhook URL found, simulating successful submission');
+                // When no webhook URL is provided, just log the data and show success
+                console.log('No webhook URL found in .env file');
                 console.log('Form data:', formData);
+                
+                // Show an alert for debugging purposes (remove in production)
+                alert('Form submitted successfully, but no webhook URL was configured. Please set WEBHOOK_URL in your .env file.');
                 
                 // Return mock successful response
                 return { success: true, message: 'Form submitted successfully (demo mode)' };
@@ -385,6 +388,9 @@
             return await response.json();
         } catch (error) {
             console.error('Error sending data to webhook:', error);
+            
+            // Show an error alert (remove in production)
+            alert('Error submitting form. Please check your webhook configuration and try again.');
             
             // For demo purposes, return success even if there's an error
             return { success: true, message: 'Form submitted successfully (demo mode)' };
