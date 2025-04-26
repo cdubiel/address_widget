@@ -9,6 +9,18 @@ window.config = {};
 // Function to load configuration from .env file
 window.loadConfig = async function() {
     try {
+        // Check if we're on Vercel (production)
+        const isVercel = window.location.hostname.includes('vercel.app');
+        
+        // If we're on Vercel, use the hardcoded webhook URL
+        if (isVercel) {
+            console.log('Running on Vercel, using production webhook URL');
+            return {
+                googleMapsApiKey: '',
+                webhookUrl: 'https://services.leadconnectorhq.com/hooks/QZe9VyGZQzDZFXapCdEq/webhook-trigger/408f4af3-66d0-4e24-9cbd-c14dbed3c5ef'
+            };
+        }
+        
         // Try to fetch the .env file
         const response = await fetch('.env');
         
@@ -17,7 +29,7 @@ window.loadConfig = async function() {
             console.warn('Could not load .env file, using fallback values');
             return {
                 googleMapsApiKey: '',
-                webhookUrl: '' // Empty webhook URL - will be handled gracefully in widget.js
+                webhookUrl: 'https://services.leadconnectorhq.com/hooks/QZe9VyGZQzDZFXapCdEq/webhook-trigger/408f4af3-66d0-4e24-9cbd-c14dbed3c5ef' // Default webhook URL
             };
         }
         
@@ -35,7 +47,7 @@ window.loadConfig = async function() {
         // Return fallback values
         return {
             googleMapsApiKey: '',
-            webhookUrl: '' // Empty webhook URL - will be handled gracefully in widget.js
+            webhookUrl: 'https://services.leadconnectorhq.com/hooks/QZe9VyGZQzDZFXapCdEq/webhook-trigger/408f4af3-66d0-4e24-9cbd-c14dbed3c5ef' // Default webhook URL
         };
     }
 };
