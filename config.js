@@ -17,7 +17,7 @@ window.loadConfig = async function() {
             console.warn('Could not load .env file, using fallback values');
             return {
                 googleMapsApiKey: '',
-                webhookUrl: 'https://services.leadconnectorhq.com/hooks/QZe9VyGZQzDZFXapCdEq/webhook-trigger/408f4af3-66d0-4e24-9cbd-c14dbed3c5ef'
+                webhookUrl: 'https://services.leadconnectorhq.com/hooks/QZe9VyGZQzDZFXapCdEq/webhook-trigger/3a3f6613-fa4f-4bd1-8f12-08426c8c4319'
             };
         }
         
@@ -35,7 +35,7 @@ window.loadConfig = async function() {
         // Return fallback values
         return {
             googleMapsApiKey: '',
-            webhookUrl: 'https://services.leadconnectorhq.com/hooks/QZe9VyGZQzDZFXapCdEq/webhook-trigger/408f4af3-66d0-4e24-9cbd-c14dbed3c5ef'
+            webhookUrl: 'https://services.leadconnectorhq.com/hooks/QZe9VyGZQzDZFXapCdEq/webhook-trigger/3a3f6613-fa4f-4bd1-8f12-08426c8c4319'
         };
     }
 };
