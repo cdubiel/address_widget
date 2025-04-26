@@ -1,16 +1,6 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "*.html", "use": "@vercel/static" },
-    { "src": "*.js", "use": "@vercel/static" },
-    { "src": "*.css", "use": "@vercel/static" }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "/$1" }
-  ],
-  "env": {
-    "WEBHOOK_URL": "@webhook_url"
-  },
-  "buildCommand": "echo 'Static site, no build needed'",
-  "outputDirectory": "."
+  "public": true,
+  "cleanUrls": true,
+  "trailingSlash": false
 }
