@@ -365,8 +365,11 @@
                 console.log('No webhook URL found in .env file');
                 console.log('Form data:', formData);
                 
-                // Show an alert for debugging purposes (remove in production)
-                alert('Form submitted successfully, but no webhook URL was configured. Please set WEBHOOK_URL in your .env file.');
+                // In production, don't show alerts
+                if (window.location.hostname === 'localhost') {
+                    // Only show alert in development
+                    alert('Form submitted successfully, but no webhook URL was configured. Please set WEBHOOK_URL in your .env file.');
+                }
                 
                 // Return mock successful response
                 return { success: true, message: 'Form submitted successfully (demo mode)' };
@@ -389,8 +392,10 @@
         } catch (error) {
             console.error('Error sending data to webhook:', error);
             
-            // Show an error alert (remove in production)
-            alert('Error submitting form. Please check your webhook configuration and try again.');
+            // Only show alert in development
+            if (window.location.hostname === 'localhost') {
+                alert('Error submitting form. Please check your webhook configuration and try again.');
+            }
             
             // For demo purposes, return success even if there's an error
             return { success: true, message: 'Form submitted successfully (demo mode)' };
