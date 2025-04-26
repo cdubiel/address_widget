@@ -9,27 +9,24 @@ window.config = {};
 // Function to load configuration from .env file
 window.loadConfig = async function() {
     try {
-        // Check if we're on Vercel (production)
-        const isVercel = window.location.hostname.includes('vercel.app');
-        
-        // If we're on Vercel, use the hardcoded webhook URL
-        if (isVercel) {
-            console.log('Running on Vercel, using production webhook URL');
+        // Check if we're on Vercel (production) with env.js loaded
+        if (window.ENV && window.ENV.WEBHOOK_URL) {
+            console.log('Using environment variables from env.js');
             return {
                 googleMapsApiKey: '',
-                webhookUrl: 'https://services.leadconnectorhq.com/hooks/QZe9VyGZQzDZFXapCdEq/webhook-trigger/408f4af3-66d0-4e24-9cbd-c14dbed3c5ef'
+                webhookUrl: window.ENV.WEBHOOK_URL
             };
         }
         
-        // Try to fetch the .env file
+        // Try to fetch the .env file (for local development)
         const response = await fetch('.env');
         
-        // If the fetch fails (e.g., when deployed), use fallback values
+        // If the fetch fails, use fallback values
         if (!response.ok) {
             console.warn('Could not load .env file, using fallback values');
             return {
                 googleMapsApiKey: '',
-                webhookUrl: 'https://services.leadconnectorhq.com/hooks/QZe9VyGZQzDZFXapCdEq/webhook-trigger/408f4af3-66d0-4e24-9cbd-c14dbed3c5ef' // Default webhook URL
+                webhookUrl: '' // Empty webhook URL - will be handled gracefully in widget.js
             };
         }
         
@@ -47,7 +44,7 @@ window.loadConfig = async function() {
         // Return fallback values
         return {
             googleMapsApiKey: '',
-            webhookUrl: 'https://services.leadconnectorhq.com/hooks/QZe9VyGZQzDZFXapCdEq/webhook-trigger/408f4af3-66d0-4e24-9cbd-c14dbed3c5ef' // Default webhook URL
+            webhookUrl: '' // Empty webhook URL - will be handled gracefully in widget.js
         };
     }
 };

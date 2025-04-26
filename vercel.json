@@ -2,5 +2,6 @@
   "version": 2,
   "public": true,
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "buildCommand": "echo 'Creating env.js from environment variables' && echo 'window.ENV = { WEBHOOK_URL: \"'$WEBHOOK_URL'\" };' > env.js"
 }
