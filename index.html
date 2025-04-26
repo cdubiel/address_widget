@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address Collection Widget</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="config.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="widget-header">
+            <h2>Get a quick and easy price:</h2>
+        </div>
+        <div class="widget-container">
+            <div id="address-widget">
+                <div class="widget-form">
+                    <div class="input-group zipcode-input">
+                        <label for="zipcode-input">Enter your ZIP code</label>
+                        <input type="text" id="zipcode-input" placeholder="Enter ZIP code..." maxlength="5" autocomplete="off">
+                    </div>
+                    <div class="input-group city-state-display hidden">
+                        <div class="city-state-text">
+                            <span id="city-state-display"></span>
+                        </div>
+                    </div>
+                    <div class="input-group address-input hidden">
+                        <label for="address-input">Enter your street address</label>
+                        <input type="text" id="address-input" placeholder="1234 Main Street..." autocomplete="off">
+                    </div>
+                    <div class="input-group name-input hidden">
+                        <label for="name-input">Name</label>
+                        <input type="text" id="name-input" placeholder="Jane Smith">
+                    </div>
+                    <div class="input-group phone-input hidden">
+                        <label for="phone-input">Phone*</label>
+                        <input type="tel" id="phone-input" placeholder="555-555-5555">
+                    </div>
+                    <button id="submit-btn" class="submit-btn">SEE MY PRICE</button>
+                </div>
+                <div class="info-text">
+                    <span>🔒 Your information is secure.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Widget embed code -->
+    <div class="embed-code-section">
+        <h3>Embed Code for WordPress</h3>
+        <pre><code>&lt;div id="address-widget-container"&gt;&lt;/div&gt;
+&lt;script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"&gt;&lt;/script&gt;
+&lt;script src="https://your-domain.com/widget.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="https://your-domain.com/styles.css"&gt;</code></pre>
+        <p>Note: Replace YOUR_API_KEY with your actual Google Maps API key.</p>
+    </div>
+
+    <!-- Load Google Maps API dynamically -->
+    <script>
+        // No need to load Google Maps API anymore
+        console.log('Widget initialized without Google Maps API');
+    </script>
+    <script src="widget.js"></script>
+</body>
+</html>

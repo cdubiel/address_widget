@@ -1,0 +1,331 @@
+/* Reset and base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+:root {
+    --orange: #FF8C38;
+    --orange-dark: #E67D2E;
+    --gray-light: #F5F5F7;
+    --text-primary: #1D1D1F;
+    --text-secondary: #86868B;
+    --border-color: #D2D2D7;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --radius: 50px;
+    --transition-speed: 0.3s;
+}
+
+body {
+    background-color: var(--gray-light);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.widget-header {
+    max-width: 800px;
+    margin: 0 auto 15px;
+}
+
+.widget-header h2 {
+    color: var(--orange);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Widget container */
+.widget-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Widget styles */
+#address-widget {
+    position: relative;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 20px var(--shadow);
+    overflow: hidden;
+    background-color: #fff;
+    transition: all var(--transition-speed) ease;
+    border: 1px solid var(--border-color);
+}
+
+.widget-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    background-color: white;
+    border-radius: 50px;
+    padding: 8px 8px 8px 20px;
+    box-shadow: 0 4px 20px var(--shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    max-width: 100%;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 150px;
+}
+
+.input-group label {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.input-group input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 25px 0 8px 0;
+    font-size: 1rem;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-bottom: 2px solid var(--orange);
+}
+
+.input-group.has-value label,
+.input-group input:focus + label {
+    top: 0;
+    font-size: 0.7rem;
+    color: var(--orange);
+}
+
+.address-input {
+    flex: 2;
+    position: relative;
+}
+
+.zipcode-input {
+    position: relative;
+    flex: 1;
+    min-width: 120px;
+}
+
+.name-input {
+    flex: 1;
+    min-width: 120px;
+}
+
+.phone-input {
+    flex: 1;
+    min-width: 150px;
+}
+
+.city-state-display {
+    display: none;
+}
+
+.submit-btn {
+    background-color: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    min-width: 180px;
+    height: 55px;
+    margin-left: auto;
+}
+
+.submit-btn:hover {
+    background-color: var(--orange-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.submit-btn:disabled {
+    background-color: var(--text-secondary);
+    cursor: not-allowed;
+}
+
+.pin-icon {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--orange);
+    font-size: 1.2rem;
+    z-index: 10;
+}
+
+.address-input input {
+    padding-left: 25px;
+}
+
+.widget-form.final-view {
+    padding: 8px;
+}
+
+.widget-form.final-view .input-group input {
+    padding: 25px 10px 8px 10px;
+}
+
+.widget-form.final-view .address-input input {
+    padding-left: 35px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .widget-form {
+        flex-direction: column;
+        padding: 15px;
+        border-radius: 20px;
+    }
+    
+    .input-group {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .submit-btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* Autocomplete dropdown */
+.autocomplete-dropdown {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 60px;
+    background: white;
+    border-radius: 8px;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 5px;
+    border: 1px solid var(--border-color);
+}
+
+.autocomplete-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover {
+    background-color: rgba(255, 140, 56, 0.05);
+}
+
+.autocomplete-item .pin-icon {
+    color: #999;
+    margin-right: 12px;
+    font-size: 1rem;
+}
+
+.close-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1rem;
+    display: none;
+}
+
+.address-input.has-value .close-icon {
+    display: block;
+}
+
+/* Embed code section */
+.embed-code-section {
+    max-width: 800px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px var(--shadow);
+}
+
+.embed-code-section h3 {
+    margin-bottom: 15px;
+    color: var(--text-primary);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+pre {
+    background: var(--gray-light);
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* Success message */
+.success-message {
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.success-message h2 {
+    margin-bottom: 15px;
+    color: var(--text-primary);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.success-message p {
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.success-message .success-address {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--gray-light);
+    border-radius: 8px;
+    display: inline-block;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
