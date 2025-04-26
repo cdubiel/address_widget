@@ -15,19 +15,26 @@
         <div class="widget-container">
             <div id="address-widget">
                 <div class="widget-form">
+                    <!-- Initial View: ZIP code only -->
                     <div class="input-group zipcode-input">
                         <label for="zipcode-input">Enter your ZIP code</label>
                         <input type="text" id="zipcode-input" placeholder="Enter ZIP code..." maxlength="5" autocomplete="off">
                     </div>
+                    
+                    <!-- City/State display (shown after ZIP code) -->
                     <div class="input-group city-state-display hidden">
                         <div class="city-state-text">
                             <span id="city-state-display"></span>
                         </div>
                     </div>
+                    
+                    <!-- Street Address input (shown after ZIP code) -->
                     <div class="input-group address-input hidden">
                         <label for="address-input">Enter your street address</label>
                         <input type="text" id="address-input" placeholder="1234 Main Street..." autocomplete="off">
                     </div>
+                    
+                    <!-- Final View: These are initially hidden -->
                     <div class="input-group name-input hidden">
                         <label for="name-input">Name</label>
                         <input type="text" id="name-input" placeholder="Jane Smith">
@@ -36,6 +43,7 @@
                         <label for="phone-input">Phone*</label>
                         <input type="tel" id="phone-input" placeholder="555-555-5555">
                     </div>
+                    
                     <button id="submit-btn" class="submit-btn">SEE MY PRICE</button>
                 </div>
                 <div class="info-text">

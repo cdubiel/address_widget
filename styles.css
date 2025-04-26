@@ -7,14 +7,14 @@
 }
 
 :root {
-    --orange: #FF8C38;
-    --orange-dark: #E67D2E;
+    --orange: #FF4136;
+    --orange-dark: #E60000;
     --gray-light: #F5F5F7;
-    --text-primary: #1D1D1F;
-    --text-secondary: #86868B;
-    --border-color: #D2D2D7;
+    --text-primary: #333333;
+    --text-secondary: #777777;
+    --border-color: #E0E0E0;
     --shadow: rgba(0, 0, 0, 0.1);
-    --radius: 50px;
+    --radius: 12px;
     --transition-speed: 0.3s;
 }
 
@@ -90,6 +90,10 @@ body {
     color: var(--text-secondary);
     transition: all 0.2s ease;
     pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
 }
 
 .input-group input {
@@ -123,6 +127,11 @@ body {
     position: relative;
     flex: 1;
     min-width: 120px;
+    padding-left: 30px;
+}
+
+.zipcode-input input {
+    padding-left: 0;
 }
 
 .name-input {
@@ -136,7 +145,28 @@ body {
 }
 
 .city-state-display {
-    display: none;
+    padding: 10px 15px;
+    background-color: rgba(255, 140, 56, 0.1);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.city-state-text {
+    font-weight: 500;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+}
+
+.city-state-text:before {
+    content: '📍';
+    margin-right: 10px;
+    color: var(--orange);
+}
+
+.hidden {
+    display: none !important;
 }
 
 .submit-btn {
@@ -184,16 +214,48 @@ body {
     padding-left: 25px;
 }
 
+/* For the final view - all on one line */
 .widget-form.final-view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
     padding: 8px;
+    border-radius: 50px;
+    min-height: 70px;
+}
+
+.widget-form.final-view .input-group {
+    margin: 0 5px;
+    min-width: 0;
+}
+
+.widget-form.final-view .address-input {
+    flex: 2;
+}
+
+.widget-form.final-view .name-input,
+.widget-form.final-view .phone-input {
+    flex: 1;
 }
 
 .widget-form.final-view .input-group input {
     padding: 25px 10px 8px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .widget-form.final-view .address-input input {
     padding-left: 35px;
+}
+
+.info-text {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin: 10px 0;
+    padding-bottom: 5px;
 }
 
 /* Responsive adjustments */

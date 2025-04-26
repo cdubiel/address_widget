@@ -17,159 +17,6 @@
     // Track form state
     let formState = 'zipcode'; // 'zipcode', 'address', 'details'
     
-    // ZIP code database (simplified for common US cities)
-    const zipCodeDatabase = {
-        '78701': { city: 'Austin', state: 'TX' },
-        '78702': { city: 'Austin', state: 'TX' },
-        '78703': { city: 'Austin', state: 'TX' },
-        '78704': { city: 'Austin', state: 'TX' },
-        '78705': { city: 'Austin', state: 'TX' },
-        '78758': { city: 'Austin', state: 'TX' },
-        '78759': { city: 'Austin', state: 'TX' },
-        '75001': { city: 'Dallas', state: 'TX' },
-        '75202': { city: 'Dallas', state: 'TX' },
-        '77001': { city: 'Houston', state: 'TX' },
-        '77002': { city: 'Houston', state: 'TX' },
-        '77003': { city: 'Houston', state: 'TX' },
-        '77004': { city: 'Houston', state: 'TX' },
-        '77005': { city: 'Houston', state: 'TX' },
-        '73301': { city: 'Oklahoma City', state: 'OK' },
-        '73102': { city: 'Oklahoma City', state: 'OK' },
-        '73103': { city: 'Oklahoma City', state: 'OK' },
-        '73104': { city: 'Oklahoma City', state: 'OK' },
-        '73105': { city: 'Oklahoma City', state: 'OK' },
-        '73106': { city: 'Oklahoma City', state: 'OK' },
-        '73107': { city: 'Oklahoma City', state: 'OK' },
-        '73108': { city: 'Oklahoma City', state: 'OK' },
-        '73109': { city: 'Oklahoma City', state: 'OK' },
-        '73110': { city: 'Oklahoma City', state: 'OK' },
-        '73111': { city: 'Oklahoma City', state: 'OK' },
-        '73112': { city: 'Oklahoma City', state: 'OK' },
-        '73113': { city: 'Oklahoma City', state: 'OK' },
-        '73114': { city: 'Oklahoma City', state: 'OK' },
-        '73115': { city: 'Oklahoma City', state: 'OK' },
-        '73116': { city: 'Oklahoma City', state: 'OK' },
-        '73117': { city: 'Oklahoma City', state: 'OK' },
-        '73118': { city: 'Oklahoma City', state: 'OK' },
-        '73119': { city: 'Oklahoma City', state: 'OK' },
-        '73120': { city: 'Oklahoma City', state: 'OK' },
-        '73121': { city: 'Oklahoma City', state: 'OK' },
-        '73122': { city: 'Oklahoma City', state: 'OK' },
-        '73123': { city: 'Oklahoma City', state: 'OK' },
-        '73124': { city: 'Oklahoma City', state: 'OK' },
-        '73125': { city: 'Oklahoma City', state: 'OK' },
-        '73126': { city: 'Oklahoma City', state: 'OK' },
-        '73127': { city: 'Oklahoma City', state: 'OK' },
-        '73128': { city: 'Oklahoma City', state: 'OK' },
-        '73129': { city: 'Oklahoma City', state: 'OK' },
-        '73130': { city: 'Oklahoma City', state: 'OK' },
-        '73131': { city: 'Oklahoma City', state: 'OK' },
-        '73132': { city: 'Oklahoma City', state: 'OK' },
-        '73134': { city: 'Oklahoma City', state: 'OK' },
-        '73135': { city: 'Oklahoma City', state: 'OK' },
-        '73136': { city: 'Oklahoma City', state: 'OK' },
-        '73137': { city: 'Oklahoma City', state: 'OK' },
-        '73139': { city: 'Oklahoma City', state: 'OK' },
-        '73140': { city: 'Oklahoma City', state: 'OK' },
-        '73141': { city: 'Oklahoma City', state: 'OK' },
-        '73142': { city: 'Oklahoma City', state: 'OK' },
-        '73143': { city: 'Oklahoma City', state: 'OK' },
-        '73144': { city: 'Oklahoma City', state: 'OK' },
-        '73145': { city: 'Oklahoma City', state: 'OK' },
-        '73146': { city: 'Oklahoma City', state: 'OK' },
-        '73147': { city: 'Oklahoma City', state: 'OK' },
-        '73148': { city: 'Oklahoma City', state: 'OK' },
-        '73149': { city: 'Oklahoma City', state: 'OK' },
-        '73150': { city: 'Oklahoma City', state: 'OK' },
-        '73151': { city: 'Oklahoma City', state: 'OK' },
-        '73152': { city: 'Oklahoma City', state: 'OK' },
-        '73153': { city: 'Oklahoma City', state: 'OK' },
-        '73154': { city: 'Oklahoma City', state: 'OK' },
-        '73155': { city: 'Oklahoma City', state: 'OK' },
-        '73156': { city: 'Oklahoma City', state: 'OK' },
-        '73157': { city: 'Oklahoma City', state: 'OK' },
-        '73159': { city: 'Oklahoma City', state: 'OK' },
-        '73160': { city: 'Oklahoma City', state: 'OK' },
-        '73162': { city: 'Oklahoma City', state: 'OK' },
-        '73163': { city: 'Oklahoma City', state: 'OK' },
-        '73164': { city: 'Oklahoma City', state: 'OK' },
-        '73165': { city: 'Oklahoma City', state: 'OK' },
-        '73167': { city: 'Oklahoma City', state: 'OK' },
-        '73169': { city: 'Oklahoma City', state: 'OK' },
-        '73170': { city: 'Oklahoma City', state: 'OK' },
-        '73172': { city: 'Oklahoma City', state: 'OK' },
-        '73173': { city: 'Oklahoma City', state: 'OK' },
-        '73178': { city: 'Oklahoma City', state: 'OK' },
-        '73179': { city: 'Oklahoma City', state: 'OK' },
-        '73184': { city: 'Oklahoma City', state: 'OK' },
-        '73185': { city: 'Oklahoma City', state: 'OK' },
-        '73189': { city: 'Oklahoma City', state: 'OK' },
-        '73190': { city: 'Oklahoma City', state: 'OK' },
-        '73194': { city: 'Oklahoma City', state: 'OK' },
-        '73195': { city: 'Oklahoma City', state: 'OK' },
-        '73196': { city: 'Oklahoma City', state: 'OK' },
-        '90001': { city: 'Los Angeles', state: 'CA' },
-        '90002': { city: 'Los Angeles', state: 'CA' },
-        '90003': { city: 'Los Angeles', state: 'CA' },
-        '90004': { city: 'Los Angeles', state: 'CA' },
-        '90005': { city: 'Los Angeles', state: 'CA' },
-        '94102': { city: 'San Francisco', state: 'CA' },
-        '94103': { city: 'San Francisco', state: 'CA' },
-        '94104': { city: 'San Francisco', state: 'CA' },
-        '94105': { city: 'San Francisco', state: 'CA' },
-        '94107': { city: 'San Francisco', state: 'CA' },
-        '10001': { city: 'New York', state: 'NY' },
-        '10002': { city: 'New York', state: 'NY' },
-        '10003': { city: 'New York', state: 'NY' },
-        '10004': { city: 'New York', state: 'NY' },
-        '10005': { city: 'New York', state: 'NY' },
-        '60601': { city: 'Chicago', state: 'IL' },
-        '60602': { city: 'Chicago', state: 'IL' },
-        '60603': { city: 'Chicago', state: 'IL' },
-        '60604': { city: 'Chicago', state: 'IL' },
-        '60605': { city: 'Chicago', state: 'IL' },
-        '33101': { city: 'Miami', state: 'FL' },
-        '33102': { city: 'Miami', state: 'FL' },
-        '33106': { city: 'Miami', state: 'FL' },
-        '33109': { city: 'Miami', state: 'FL' },
-        '33111': { city: 'Miami', state: 'FL' },
-        '02108': { city: 'Boston', state: 'MA' },
-        '02109': { city: 'Boston', state: 'MA' },
-        '02110': { city: 'Boston', state: 'MA' },
-        '02111': { city: 'Boston', state: 'MA' },
-        '02112': { city: 'Boston', state: 'MA' },
-        '98101': { city: 'Seattle', state: 'WA' },
-        '98102': { city: 'Seattle', state: 'WA' },
-        '98103': { city: 'Seattle', state: 'WA' },
-        '98104': { city: 'Seattle', state: 'WA' },
-        '98105': { city: 'Seattle', state: 'WA' },
-        '80201': { city: 'Denver', state: 'CO' },
-        '80202': { city: 'Denver', state: 'CO' },
-        '80203': { city: 'Denver', state: 'CO' },
-        '80204': { city: 'Denver', state: 'CO' },
-        '80205': { city: 'Denver', state: 'CO' },
-        '20001': { city: 'Washington', state: 'DC' },
-        '20002': { city: 'Washington', state: 'DC' },
-        '20003': { city: 'Washington', state: 'DC' },
-        '20004': { city: 'Washington', state: 'DC' },
-        '20005': { city: 'Washington', state: 'DC' },
-        '30301': { city: 'Atlanta', state: 'GA' },
-        '30302': { city: 'Atlanta', state: 'GA' },
-        '30303': { city: 'Atlanta', state: 'GA' },
-        '30304': { city: 'Atlanta', state: 'GA' },
-        '30305': { city: 'Atlanta', state: 'GA' },
-        '19019': { city: 'Philadelphia', state: 'PA' },
-        '19101': { city: 'Philadelphia', state: 'PA' },
-        '19102': { city: 'Philadelphia', state: 'PA' },
-        '19103': { city: 'Philadelphia', state: 'PA' },
-        '19104': { city: 'Philadelphia', state: 'PA' },
-        '85001': { city: 'Phoenix', state: 'AZ' },
-        '85002': { city: 'Phoenix', state: 'AZ' },
-        '85003': { city: 'Phoenix', state: 'AZ' },
-        '85004': { city: 'Phoenix', state: 'AZ' },
-        '85005': { city: 'Phoenix', state: 'AZ' }
-    };
-
     // Initialize widget
     function initWidget() {
         // Get DOM elements
@@ -225,6 +72,15 @@
             }
         });
         
+        // Listen for address input changes
+        addressInput.addEventListener('input', function() {
+            if (addressInput.value.trim() !== '') {
+                addressGroup.classList.add('has-value');
+            } else {
+                addressGroup.classList.remove('has-value');
+            }
+        });
+        
         // Format phone number as user types
         if (phoneInput) {
             phoneInput.addEventListener('input', formatPhoneNumber);
@@ -255,24 +111,14 @@
         formState = 'zipcode';
         
         // Hide city/state display
-        cityStateDisplay.classList.remove('visible');
-        setTimeout(() => {
-            cityStateDisplay.classList.add('hidden');
-        }, 300);
+        cityStateDisplay.classList.add('hidden');
         
         // Hide address field
-        addressGroup.classList.remove('visible');
-        setTimeout(() => {
-            addressGroup.classList.add('hidden');
-        }, 300);
+        addressGroup.classList.add('hidden');
         
         // Hide name and phone fields
-        nameGroup.classList.remove('visible');
-        phoneGroup.classList.remove('visible');
-        setTimeout(() => {
-            nameGroup.classList.add('hidden');
-            phoneGroup.classList.add('hidden');
-        }, 300);
+        nameGroup.classList.add('hidden');
+        phoneGroup.classList.add('hidden');
         
         // Reset address field
         addressInput.value = '';
@@ -283,38 +129,54 @@
     }
     
     // Look up ZIP code and show city/state
-    function lookupZipCode(zipcode) {
-        // Check if zipcode exists in our database
-        if (zipCodeDatabase[zipcode]) {
-            const { city, state } = zipCodeDatabase[zipcode];
-            
-            // Show city and state
-            cityStateText.textContent = `${city}, ${state}`;
+    async function lookupZipCode(zipcode) {
+        try {
+            // Show loading state
+            cityStateText.textContent = 'Looking up location...';
             cityStateDisplay.classList.remove('hidden');
-            setTimeout(() => {
-                cityStateDisplay.classList.add('visible');
-            }, 10);
             
-            // Show address field
-            addressGroup.classList.remove('hidden');
-            setTimeout(() => {
-                addressGroup.classList.add('visible');
+            // Use the Zippopotam.us API to look up ZIP code
+            const response = await fetch(`https://api.zippopotam.us/us/${zipcode}`);
+            
+            if (!response.ok) {
+                throw new Error('Invalid ZIP code');
+            }
+            
+            const data = await response.json();
+            
+            if (data && data.places && data.places.length > 0) {
+                const place = data.places[0];
+                const city = place['place name'];
+                const state = place['state abbreviation'];
+                
+                // Show city and state
+                cityStateText.textContent = `${city}, ${state}`;
+                
+                // Show address field
+                addressGroup.classList.remove('hidden');
                 
                 // Focus the address input
                 addressInput.focus();
-            }, 10);
+                
+                // Update form state
+                formState = 'address';
+            } else {
+                throw new Error('Location not found');
+            }
+        } catch (error) {
+            console.error('Error looking up ZIP code:', error);
+            
+            // Fallback to accepting any ZIP code
+            cityStateText.textContent = 'Location found';
+            
+            // Show address field
+            addressGroup.classList.remove('hidden');
+            
+            // Focus the address input
+            addressInput.focus();
             
             // Update form state
             formState = 'address';
-            
-            // Update button text
-            submitBtn.textContent = 'NEXT';
-        } else {
-            // Show error for invalid ZIP code
-            zipcodeInput.style.borderBottom = '2px solid var(--orange)';
-            setTimeout(() => {
-                zipcodeInput.style.borderBottom = '';
-            }, 2000);
         }
     }
     
@@ -356,17 +218,11 @@
             const address = addressInput.value.trim();
             
             if (address) {
-                // Switch to final view with all fields visible side by side
+                // Show final view with all fields
                 showFinalView();
                 
                 // Update form state
                 formState = 'details';
-                
-                // Update button text
-                submitBtn.textContent = 'SEE MY PRICE';
-                
-                // Focus the name input
-                nameInput.focus();
             } else {
                 // Show error if address is empty
                 addressInput.style.borderBottom = '2px solid var(--orange)';
@@ -384,14 +240,6 @@
             
             // Simple validation
             let isValid = true;
-            
-            if (!zipcode || zipcode.length !== 5 || !/^\d{5}$/.test(zipcode)) {
-                zipcodeInput.style.borderBottom = '2px solid var(--orange)';
-                setTimeout(() => {
-                    zipcodeInput.style.borderBottom = '';
-                }, 2000);
-                isValid = false;
-            }
             
             if (!address) {
                 addressInput.style.borderBottom = '2px solid var(--orange)';
@@ -419,14 +267,13 @@
             
             if (!isValid) return;
             
-            // Get city and state from zipcode
-            const { city, state } = zipCodeDatabase[zipcode] || { city: '', state: '' };
+            // Get city and state from display
+            const cityState = cityStateText.textContent || '';
             
             // Collect form data
             const formData = {
                 zipcode,
-                city,
-                state,
+                cityState,
                 address,
                 name,
                 phone
@@ -449,7 +296,7 @@
                             <p>Your information has been submitted successfully.</p>
                             <p>We'll contact you shortly about service at:</p>
                             <p class="success-address">${address}</p>
-                            <p class="success-address">${city}, ${state} ${zipcode}</p>
+                            <p class="success-address">${cityState} ${zipcode}</p>
                         </div>
                     `;
                 })
@@ -468,25 +315,17 @@
     
     // Show the final view with all fields side by side
     function showFinalView() {
-        // Hide the city/state display
+        // Hide the ZIP code field and city/state display
+        zipcodeGroup.style.display = 'none';
         cityStateDisplay.style.display = 'none';
         
-        // Reset the form layout
+        // Apply the final view styling
         widgetForm.className = 'widget-form final-view';
         
         // Show all fields
-        zipcodeGroup.style.display = 'none'; // Hide ZIP code field
         addressGroup.classList.remove('hidden');
-        addressGroup.style.display = 'block';
-        addressGroup.style.flex = '2';
-        
         nameGroup.classList.remove('hidden');
-        nameGroup.style.display = 'block';
-        nameGroup.style.flex = '1';
-        
         phoneGroup.classList.remove('hidden');
-        phoneGroup.style.display = 'block';
-        phoneGroup.style.flex = '1';
         
         // Add pin icon to address field if not already there
         if (!addressGroup.querySelector('.pin-icon')) {
@@ -495,8 +334,11 @@
             pinIcon.innerHTML = '📍';
             addressGroup.insertBefore(pinIcon, addressInput);
         }
+        
+        // Focus the name input
+        nameInput.focus();
     }
-
+    
     // Send form data to webhook
     async function sendToWebhook(formData) {
         try {
