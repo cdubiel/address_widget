@@ -42,12 +42,6 @@
         submitBtn.addEventListener('click', handleSubmit);
         zipcodeInput.addEventListener('focus', handleZipFocus);
         
-        // Add pin icon to zipcode input
-        const pinIcon = document.createElement('span');
-        pinIcon.className = 'pin-icon';
-        pinIcon.innerHTML = '📍';
-        zipcodeGroup.insertBefore(pinIcon, zipcodeInput);
-        
         // Add close icon to zipcode input
         const closeIcon = document.createElement('span');
         closeIcon.className = 'close-icon';
