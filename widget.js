@@ -329,6 +329,18 @@
             addressGroup.insertBefore(pinIcon, addressInput);
         }
         
+        // Check if we're on mobile
+        const isMobile = window.innerWidth <= 768;
+        
+        // Adjust layout for mobile
+        if (isMobile) {
+            // Set appropriate classes for mobile view
+            widgetForm.classList.add('mobile-view');
+            
+            // Adjust button text to be shorter on mobile
+            submitBtn.textContent = 'GET PRICE';
+        }
+        
         // Focus the name input
         nameInput.focus();
     }
