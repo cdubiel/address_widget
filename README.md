@@ -9,7 +9,7 @@ A beautiful, reactive address collection widget that can be embedded on WordPres
   2. Second stage: Expanded form with address, name, and phone fields
 - Google Maps Places API integration for address autocomplete
 - Responsive design that works on all devices
-- Orange "SEE MY PRICE" call-to-action button
+- Orange "SEE MY ESTIMATE" call-to-action button
 - Easy to embed on WordPress or any website
 - Phone number formatting as the user types
 
@@ -33,6 +33,28 @@ To embed this widget on your WordPress site, add the following code to your page
 ```
 
 Replace `YOUR_API_KEY` with your actual Google Maps API key and `https://your-domain.com/` with the actual URL where you host these files.
+
+## Embedding in GoHighLevel
+
+To embed this widget in a GoHighLevel funnel page:
+
+1. Add a Custom HTML element to your GoHighLevel page
+2. Paste the following code:
+
+```html
+<!-- Address Widget Container -->
+<div id="address-widget-container"></div>
+
+<!-- Widget Scripts -->
+<script src="https://your-vercel-app-url.vercel.app/env.js"></script>
+<script src="https://your-vercel-app-url.vercel.app/config.js"></script>
+<script src="https://your-vercel-app-url.vercel.app/widget.js"></script>
+<link rel="stylesheet" href="https://your-vercel-app-url.vercel.app/styles.css">
+```
+
+3. Replace `https://your-vercel-app-url.vercel.app` with your actual Vercel deployment URL
+
+The widget will automatically detect GoHighLevel forms and populate their fields with the collected information.
 
 ## Google Maps API Integration
 

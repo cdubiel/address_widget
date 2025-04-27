@@ -404,8 +404,9 @@
 
     // Create embeddable version of the widget
     function createEmbeddableWidget() {
-        // This function would be called when the script is loaded on an external site
+        // Get the container element
         const container = document.getElementById('address-widget-container');
+        
         if (container) {
             // Clone the widget HTML structure
             const widgetHTML = `
@@ -414,14 +415,12 @@
                 </div>
                 <div id="address-widget" class="widget-embedded">
                     <div class="widget-form">
+                        <div class="city-state-display hidden">
+                            <span id="city-state-display"></span>
+                        </div>
                         <div class="input-group zipcode-input">
                             <label for="zipcode-input">Enter your ZIP code</label>
                             <input type="text" id="zipcode-input" placeholder="Enter ZIP code..." maxlength="5" autocomplete="off">
-                        </div>
-                        <div class="input-group city-state-display hidden">
-                            <div class="city-state-text">
-                                <span id="city-state-display"></span>
-                            </div>
                         </div>
                         <div class="input-group address-input hidden">
                             <label for="address-input">Enter your street address</label>
@@ -447,6 +446,91 @@
             
             // Re-initialize the widget
             initWidget();
+            
+            // Add GoHighLevel specific handling
+            setupGoHighLevelIntegration();
+        }
+    }
+    
+    // Setup GoHighLevel specific integration
+    function setupGoHighLevelIntegration() {
+        // Check if we're in a GoHighLevel page
+        const isGoHighLevel = window.location.hostname.includes('gohighlevel') || 
+                             window.location.hostname.includes('highlevelmarketing') ||
+                             document.querySelector('meta[name="ghl-site"]');
+        
+        if (isGoHighLevel) {
+            console.log('GoHighLevel environment detected, setting up integration');
+            
+            // Override the submit handler to work with GoHighLevel
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                // Store the original click handler
+                const originalClickHandler = submitBtn.onclick;
+                
+                // Replace with our enhanced handler
+                submitBtn.onclick = function(event) {
+                    // Prevent default form submission
+                    event.preventDefault();
+                    
+                    // Get form values
+                    const zipcode = document.getElementById('zipcode-input').value.trim();
+                    const address = document.getElementById('address-input').value.trim();
+                    const name = document.getElementById('name-input').value.trim();
+                    const phone = document.getElementById('phone-input').value.trim();
+                    const cityState = document.getElementById('city-state-display').textContent || '';
+                    
+                    // Check if GoHighLevel form exists
+                    const ghlForm = document.querySelector('form[data-ghl-form]');
+                    if (ghlForm) {
+                        console.log('GoHighLevel form found, populating fields');
+                        
+                        // Try to find and populate GoHighLevel form fields
+                        const inputs = ghlForm.querySelectorAll('input, textarea, select');
+                        inputs.forEach(input => {
+                            const name = input.name.toLowerCase();
+                            const placeholder = (input.placeholder || '').toLowerCase();
+                            
+                            // Match fields based on name or placeholder
+                            if (name.includes('zip') || placeholder.includes('zip')) {
+                                input.value = zipcode;
+                            } else if (name.includes('address') || placeholder.includes('address')) {
+                                input.value = address;
+                            } else if (name.includes('name') || placeholder.includes('name')) {
+                                input.value = name;
+                            } else if (name.includes('phone') || placeholder.includes('phone')) {
+                                input.value = phone;
+                            } else if (name.includes('city') || placeholder.includes('city')) {
+                                // Extract city from cityState
+                                const cityMatch = cityState.match(/^([^,]+)/);
+                                if (cityMatch && cityMatch[1]) {
+                                    input.value = cityMatch[1].trim();
+                                }
+                            } else if (name.includes('state') || placeholder.includes('state')) {
+                                // Extract state from cityState
+                                const stateMatch = cityState.match(/,\s*([A-Z]{2})/);
+                                if (stateMatch && stateMatch[1]) {
+                                    input.value = stateMatch[1].trim();
+                                }
+                            }
+                            
+                            // Trigger change event to notify GoHighLevel
+                            const event = new Event('change', { bubbles: true });
+                            input.dispatchEvent(event);
+                        });
+                        
+                        // Submit to our webhook as well
+                        handleSubmit(event);
+                        
+                        // Optional: Auto-submit the GoHighLevel form
+                        // Uncomment the next line to enable auto-submission
+                        // ghlForm.submit();
+                    } else {
+                        // No GoHighLevel form found, use our regular submission
+                        handleSubmit(event);
+                    }
+                };
+            }
         }
     }
 
