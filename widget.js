@@ -38,6 +38,38 @@
             return;
         }
         
+        // Check for autofilled values on page load (especially for iOS)
+        setTimeout(() => {
+            // Check if zipcode is autofilled
+            if (zipcodeInput.value.trim() !== '') {
+                zipcodeGroup.classList.add('has-value');
+                // If it's a valid zipcode, look it up
+                const zipcode = zipcodeInput.value.trim();
+                if (zipcode.length === 5 && /^\d{5}$/.test(zipcode)) {
+                    lookupZipCode(zipcode);
+                }
+            }
+            
+            // Check if address is autofilled
+            if (addressInput.value.trim() !== '') {
+                addressGroup.classList.add('has-value');
+                // If we're still in zipcode state but have an address, move to address state
+                if (formState === 'zipcode' && zipcodeInput.value.trim() !== '') {
+                    formState = 'address';
+                    addressGroup.classList.remove('hidden');
+                }
+            }
+            
+            // Check if name and phone are autofilled
+            if (nameInput.value.trim() !== '' || phoneInput.value.trim() !== '') {
+                // If we have name/phone and address, show the final view
+                if (addressInput.value.trim() !== '') {
+                    showFinalView();
+                    formState = 'details';
+                }
+            }
+        }, 500); // Small delay to allow autofill to complete
+        
         // Set up event listeners
         submitBtn.addEventListener('click', handleSubmit);
         zipcodeInput.addEventListener('focus', handleZipFocus);
