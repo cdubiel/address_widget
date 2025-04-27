@@ -119,7 +119,7 @@
         addressGroup.classList.remove('has-value');
         
         // Reset button text
-        submitBtn.textContent = 'SEE MY PRICE';
+        submitBtn.textContent = 'SEE MY ESTIMATE';
     }
     
     // Look up ZIP code and show city/state
@@ -299,7 +299,7 @@
                     
                     // Reset button state
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'SEE MY PRICE';
+                    submitBtn.textContent = 'SEE MY ESTIMATE';
                     
                     // Show error message
                     alert('There was an error submitting your information. Please try again.');
@@ -338,7 +338,7 @@
             widgetForm.classList.add('mobile-view');
             
             // Adjust button text to be shorter on mobile
-            submitBtn.textContent = 'GET PRICE';
+            submitBtn.textContent = 'GET ESTIMATE';
         }
         
         // Focus the name input
@@ -410,7 +410,7 @@
             // Clone the widget HTML structure
             const widgetHTML = `
                 <div class="widget-header">
-                    <h2>Get a quick and easy price:</h2>
+                    <h2>Get a quick and easy estimate:</h2>
                 </div>
                 <div id="address-widget" class="widget-embedded">
                     <div class="widget-form">
@@ -435,7 +435,7 @@
                             <label for="phone-input">Phone*</label>
                             <input type="tel" id="phone-input" placeholder="555-555-5555">
                         </div>
-                        <button id="submit-btn" class="submit-btn">SEE MY PRICE</button>
+                        <button id="submit-btn" class="submit-btn">SEE MY ESTIMATE</button>
                     </div>
                     <div class="info-text">
                         <span>🔒 Your information is secure.</span>
